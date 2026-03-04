@@ -1,0 +1,169 @@
+.complaint-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.complaint-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.complaint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.complaint-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.complaint-id {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    background: var(--background-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.complaint-title {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
+.complaint-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+.badge-water {
+    background-color: #dbeafe;
+    color: #1e3a8a;
+}
+
+.badge-electricity {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-road {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.badge-sanitation {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.complaint-desc {
+    color: var(--text-main);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.complaint-image-container {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.complaint-image {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.complaint-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.complaint-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.complaint-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.status-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.text-pending {
+    color: #f59e0b;
+}
+
+.text-in-progress {
+    color: #3b82f6;
+}
+
+.text-resolved {
+    color: #10b981;
+}
+
+.text-rejected {
+    color: #ef4444;
+}
+
+.status-pending {
+    color: #f59e0b;
+}
+
+.status-progress {
+    color: #3b82f6;
+}
+
+.status-resolved {
+    color: #10b981;
+}
+
+.status-rejected {
+    color: #ef4444;
+}
+
+.status-select {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+    min-width: 120px;
+}
