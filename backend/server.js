@@ -25,13 +25,13 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/departments', require('./routes/departmentRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
-// Serve frontend in production 
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
     app.get('*', (req, res) =>
         res.sendFile(
-            path.resolve(__dirname, '../', 'frontend', 'dist', 'index.html')
+            path.resolve(__dirname, '../frontend/dist/index.html')
         )
     );
 } else {

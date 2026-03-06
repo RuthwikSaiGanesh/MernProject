@@ -192,6 +192,7 @@ const updateProfile = asyncHandler(async (req, res) => {
         if (req.body.taluk !== undefined) user.taluk = req.body.taluk;
 
         if (user.role === 'Department') {
+            if (req.body.department !== undefined) user.department = req.body.department;
             user.departmentInfo = {
                 officeLocation: req.body.officeLocation !== undefined
                     ? req.body.officeLocation

@@ -160,13 +160,19 @@ const Profile = () => {
                         <>
                             <div className='form-group'>
                                 <label className='form-label'>Department</label>
-                                <input
-                                    type='text'
+                                <select
                                     className='form-control'
+                                    name='department'
                                     value={formData.department}
-                                    disabled
-                                    style={{ backgroundColor: '#e9ecef' }}
-                                />
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value=''>Select Department</option>
+                                    <option value='Water'>Water</option>
+                                    <option value='Electricity'>Electricity</option>
+                                    <option value='Road'>Road</option>
+                                    <option value='Sanitation'>Sanitation</option>
+                                </select>
                             </div>
 
                             <div className='form-group'>
