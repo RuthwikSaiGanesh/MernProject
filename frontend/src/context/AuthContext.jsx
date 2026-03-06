@@ -11,15 +11,36 @@ export const AuthProvider = ({ children }) => {
         const checkLoggedIn = async () => {
             try {
                 const storedUser = localStorage.getItem('user');
+                let token = null;
+
                 if (storedUser) {
-                    const parsedUser = JSON.parse(storedUser);
-                    api.defaults.headers.common['Authorization'] = `Bearer ${parsedUser.token}`;
+                    try {
+                        const parsedUser = JSON.parse(storedUser);
+                        if (parsedUser && parsedUser.token) {
+                            token = parsedUser.token;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing stored user', e);
+                    }
+                }
+
+                if (!token) {
+                    token = localStorage.getItem('token');
+                }
+
+                if (token) {
+                    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     const res = await api.get('/auth/me');
-                    setUser({ ...res.data, token: parsedUser.token });
+
+                    // Maintain token and data consistently
+                    const userData = { ...res.data, token };
+                    localStorage.setItem('user', JSON.stringify(userData));
+                    setUser(userData);
                 }
             } catch (error) {
-                console.error(error);
+                console.error('Session expired or invalid token', error);
                 localStorage.removeItem('user');
+                localStorage.removeItem('token');
             } finally {
                 setLoading(false);
             }
