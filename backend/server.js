@@ -12,12 +12,13 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: [
-        "https://mernproject-0f1.onrender.com",
-        "http://localhost:5173"
-    ],
+    origin: "https://mernproject-0f1.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
+
+app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
