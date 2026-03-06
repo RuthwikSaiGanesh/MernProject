@@ -1,54 +1,58 @@
-const path = require('path');
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const { errorHandler } = require('./middleware/errorMiddleware');
+const path = require("path");
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const connectDB = require("./config/db");
+const { errorHandler } = require("./middleware/errorMiddleware");
 
 dotenv.config();
 
+// Connect DB
 connectDB();
 
 const app = express();
 
-const cors = require("cors");
+// CORS
+app.use(
+    cors({
+        origin: ["https://mernproject-0f1.onrender.com", "http://localhost:5173"],
+        credentials: true,
+    })
+);
 
-app.use(cors({
-    origin: ["https://mernproject-0f1.onrender.com"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-}));
-app.options("*", cors());
+// Body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Static folder for uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Static uploads
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/complaints', require('./routes/complaintRoutes'));
-app.use('/api/admin', require('./routes/adminRoutes'));
-app.use('/api/departments', require('./routes/departmentRoutes'));
-app.use('/api/users', require('./routes/userRoutes'));
+// API routes
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/complaints", require("./routes/complaintRoutes"));
+app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/departments", require("./routes/departmentRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// Production: serve frontend build
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-    app.get('*', (req, res) =>
-        res.sendFile(
-            path.resolve(__dirname, '../frontend/dist/index.html')
-        )
-    );
+    app.get(/.*/, (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+    });
 } else {
-    app.get('/', (req, res) => res.send('Please set to production'));
+    app.get("/", (req, res) => {
+        res.send("API is running...");
+    });
 }
 
-// Error Middleware
+// Error middleware
 app.use(errorHandler);
 
+// Start server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
